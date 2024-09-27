@@ -300,7 +300,12 @@ class Process:
 
         self.ql.log.info(f'Calling {dll_name} DllMain at {entry_point:#x}')
 
-        regs_state = self.ql.arch.regs.save()
+        regs_state = {}
+        try:
+            regs_state = self.ql.arch.regs.save()
+        except UcError:
+            self.ql.log.error(f'Failed to save CPU state before running {dll_name} DllMain, bailing')
+            return
 
         fcall = self.ql.os.fcall_select(CDECL)
         fcall.call_native(entry_point, args, exit_point)
