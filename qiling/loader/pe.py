@@ -755,7 +755,7 @@ class QlLoaderPE(QlLoader, Process):
                 self.init_eprocess()
 
                 # set IRQ Level in CR8 to PASSIVE_LEVEL
-                self.ql.arch.regs.write(UC_X86_REG_CR8, 0)
+                # self.ql.arch.regs.write(UC_X86_REG_CR8, 0)
 
                 # setup CR4, enabling: DE, PSE, PAE, MCE, PGE, OSFXSR and OSXMMEXCPT.
                 # some drivers may check this at initialized
